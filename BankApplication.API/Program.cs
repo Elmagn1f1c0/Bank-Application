@@ -1,6 +1,8 @@
 using BankApplication.Core.Services.Implementation;
 using BankApplication.Core.Services.Interface;
 using BankApplication.Data.Context;
+using BankApplication.Data.Repository.Implementation;
+using BankApplication.Data.Repository.Interface;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -19,6 +21,9 @@ namespace BankApplication.API
             // Add services to the container.
             builder.Services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
+            builder.Services.AddScoped<IAccountRepository, AccountRepository>();
+            builder.Services.AddScoped<IAccountService, AccountService>();
+            builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
             builder.Services.AddIdentity<IdentityUser, IdentityRole>(options =>
             {
                 options.Password.RequiredLength = 8;
