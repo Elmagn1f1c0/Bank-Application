@@ -20,11 +20,6 @@ namespace BankApplication.Data.Repository.Implementation
         }
         public Account Authenticate(string AccountNumber, string Pin)
         {
-            //var account = _db.Accounts.Where(x => x.AccountNumberGenerated == AccountNumber).SingleOrDefault();
-            //if (account == null) return null;
-            ////Verify pinHash
-            //if (!VerifyPinHash(Pin, account.PinHash, account.PinSalt)) return null;
-            //return account;
             var account = _db.Accounts.Where(x => x.AccountNumberGenerated == AccountNumber).SingleOrDefault();
             if (account == null || !VerifyPinHash(Pin, account.PinHash, account.PinSalt))
             {
@@ -95,7 +90,6 @@ namespace BankApplication.Data.Repository.Implementation
         public Account GetByAccountNumber(string AccountNumber)
         {
             var account = _db.Accounts.Where(x => x.AccountNumberGenerated == AccountNumber).FirstOrDefault();
-            //if (account != null) return null;
             if (account == null)
             {
                 throw new ArgumentException("Account number is not correct.");

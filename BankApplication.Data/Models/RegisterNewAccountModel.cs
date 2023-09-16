@@ -14,16 +14,11 @@ namespace BankApplication.Data.Models
         
         public string FirstName { get; set; }
         public string LastName { get; set; }
-        // public string AccountName { get; set; }
-        [StringLength(11, ErrorMessage = "Phone number must not exceed 11 characters.")]
+        [RegularExpression(@"^[0-9]{11}$", ErrorMessage = "Phone number must be exactly 11 digits.")]
         public string PhoneNumber { get; set; }
         [EmailAddress(ErrorMessage = "Invalid email address.")]
         public string Email { get; set; }
-        //public string CurrentAccountBalance { get; set; }
         public AccountType AccountType { get; set; }
-        //public string AccountNumberGenerated { get; set; }
-        //public byte[] PinHash { get; set; }
-        //public byte[] PinSalt { get; set; }
         public DateTime DateCreated { get; set; }
         public DateTime DateLastUpdated { get; set; }
         [Required]

@@ -16,11 +16,11 @@ namespace BankApplication.Data.Models
         [Key]
         public int Id { get; set; }
         public string TransactionUniqueReference { get; set; } // This I will generate in every instance of this class
-        public decimal Transactionamount { get; set; }
+        public decimal TransactionAmount { get; set; }
         public TranStatus TransactionStatus { get; set; }
         public bool IsSuccessful => TransactionStatus.Equals(TranStatus.Success); // This sis depending on value of TransactionStatus
-        public string TransactionSourceaccount { get; set; }
-        public string TransactionDestinationaccount { get; set;}
+        public string TransactionSourceAccount { get; set; }
+        public string TransactionDestinationAccount { get; set;}
         public string TransactionParticulars { get; set; }
         public TranType TransactionType { get; set; }
         public DateTime TransactionDate { get; set; }

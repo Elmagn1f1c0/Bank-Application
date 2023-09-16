@@ -25,11 +25,28 @@ namespace BankApplication.API.Controllers
         [HttpPost("register_new_account")]
         public IActionResult RegisterNewAccount([FromBody] RegisterNewAccountModel newAccount)
         {
-            if (!ModelState.IsValid) return BadRequest(newAccount);
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
 
             var account = _mapper.Map<Account>(newAccount);
-            return Ok(_service.Create(account, newAccount.Pin, newAccount.ConfirmPin));
+            try
+            {
+                
+                return Ok(_service.Create(account, newAccount.Pin, newAccount.ConfirmPin));
+            }
+            catch (Exception ex)
+            {
+                if (ex.Message.Contains("An account already exists with this email"))
+                {
+                    ModelState.AddModelError("Email", "Email already in use");
+                    return BadRequest(ModelState);
+                }
+                return StatusCode(500, "An error occurred while creating the account");
+            }
         }
+
 
         [HttpGet("get_all_accounts")]
         public IActionResult GetAllAccounts()
@@ -42,8 +59,6 @@ namespace BankApplication.API.Controllers
         [HttpPost("authenticate")]
         public IActionResult Authenticate([FromBody] AuthenticateModel model)
         {
-            //if (!ModelState.IsValid) return BadRequest(model);
-            //return Ok(_service.Authenticate(model.AccountNumber, model.Pin));
             if (!ModelState.IsValid)
             {
                 return BadRequest(model);
@@ -96,7 +111,7 @@ namespace BankApplication.API.Controllers
                 var cleanAccount = _mapper.Map<GetAccountModel>(account);
                 return Ok(cleanAccount);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 
                 return BadRequest("An error occurred while processing the request.");
@@ -106,11 +121,6 @@ namespace BankApplication.API.Controllers
         [HttpPut("update_account")]
         public IActionResult UpdateAccount([FromBody] UpdateAccountModel model)
         {
-            //if(!ModelState.IsValid) return BadRequest(model);
-
-            //var account = _mapper.Map<Account>(model);
-            //_service.Update(account, model.Pin);
-            //return Ok();
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
@@ -122,7 +132,7 @@ namespace BankApplication.API.Controllers
                 _service.Update(account, model.Pin);
                 return Ok();
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 return BadRequest("One or more fields is/are incorrect. Please check your input.");
             }
