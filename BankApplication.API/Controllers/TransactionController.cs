@@ -22,14 +22,6 @@ namespace BankApplication.API.Controllers
             _mapper = mapper;
         }
 
-        //[HttpPost("create_new_transaction")]
-        //public IActionResult CreateNewTransaction([FromBody] TransactionRequest transactionRequest)
-        //{
-        //    if(!ModelState.IsValid) return BadRequest(transactionRequest);
-
-        //    var transaction = _mapper.Map<Transaction>(transactionRequest);
-        //    return Ok(_service.CreateNewTransaction(transaction));
-        //}
 
         [HttpPost("make_deposit")]
         public IActionResult MakeDeposit(string AccountNumber, decimal Amount, string TransactionPin)
@@ -90,33 +82,6 @@ namespace BankApplication.API.Controllers
             }
         }
 
-
-        //[HttpPost("make_funds_transfer")]
-        //public IActionResult MakeFundsTransfer(string FromAccount, string ToAccount, decimal Amount, string TransactionPin)
-        //{
-        //    try
-        //    {
-        //        if (!Regex.IsMatch(FromAccount, @"^[0][1-9]\d{9}$|^[1-9]\d{9}$") || !Regex.IsMatch(ToAccount, @"^[0][1-9]\d{9}$|^[1-9]\d{9}$"))
-        //        {
-
-        //            return BadRequest("Account Number must be 10-digit");
-        //        }
-
-        //        Response response = _service.MakeFundsTransfer(FromAccount, ToAccount, Amount, TransactionPin);
-
-        //        if (response.ResponseCode == "03")
-        //        {
-        //            return BadRequest("Invalid Account number or pin");
-        //        }
-
-        //         return Ok(response);
-        //    }
-        //    catch (ApplicationException)
-        //    {
-
-        //        return BadRequest("Invalid Account number or pin");
-        //    }
-        //}
         [HttpPost("make_funds_transfer")]
         public IActionResult MakeFundsTransfer(string FromAccount, string ToAccount, decimal Amount, string TransactionPin)
         {
