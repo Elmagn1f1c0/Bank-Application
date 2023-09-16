@@ -42,21 +42,6 @@ namespace BankApplication.API.Controllers
             return BadRequest(errorResponse);
         }
 
-
-        //[HttpPost("Login")]
-        //public async Task<IActionResult> Login(LoginUser user)
-        //{
-        //    if (!ModelState.IsValid)
-        //    {
-        //        return BadRequest();
-        //    }
-        //    if (await _authService.Login(user))
-        //    {
-        //        return Ok("Done");
-        //    }
-
-        //    return BadRequest();
-        //}
         [HttpPost("Login")]
         public async Task<IActionResult> Login(LoginUser user)
         {

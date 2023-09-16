@@ -22,7 +22,6 @@ namespace BankApplication.API.Controllers
             _mapper = mapper;
         }
 
-
         [HttpPost("make_deposit")]
         public IActionResult MakeDeposit(string AccountNumber, decimal Amount, string TransactionPin)
         {
@@ -50,7 +49,6 @@ namespace BankApplication.API.Controllers
 
             return Ok(response);
         }
-
 
         [HttpPost("make_withdrawal")]
         public IActionResult MakeWithdrawal(string AccountNumber, decimal Amount, string TransactionPin)
@@ -118,8 +116,6 @@ namespace BankApplication.API.Controllers
             }
         }
 
-
-
         [HttpGet("find_by_date")]
         public IActionResult FindTransactionByDate(DateTime date)
         {
@@ -136,10 +132,5 @@ namespace BankApplication.API.Controllers
             }
 
         }
-
-
-
     }
-
-
 }
